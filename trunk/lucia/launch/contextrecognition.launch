@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<launch>
+  <node name="lucia" pkg="lucia" type="contextrecognition" args="se.oru.lucia.contextrecognition.TestContextRecognition" output="screen">
+     <param name="domain" value="$(find lucia)/domains/testProactivePlanningLucia.ddl" />
+  </node>
+</launch>
