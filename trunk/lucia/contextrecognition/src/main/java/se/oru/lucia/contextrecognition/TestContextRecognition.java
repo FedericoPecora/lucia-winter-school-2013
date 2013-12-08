@@ -16,10 +16,12 @@ import org.metacsp.time.Bounds;
 import org.metacsp.utility.logging.MetaCSPLogging;
 import org.metacsp.utility.timelinePlotting.TimelinePublisher;
 import org.metacsp.utility.timelinePlotting.TimelineVisualizer;
+import org.ros.exception.ParameterNotFoundException;
 import org.ros.message.MessageListener;
 import org.ros.namespace.GraphName;
 import org.ros.node.AbstractNodeMain;
 import org.ros.node.ConnectedNode;
+import org.ros.node.parameter.ParameterTree;
 import org.ros.node.topic.Publisher;
 import org.ros.node.topic.Subscriber;
 
@@ -35,12 +37,20 @@ public class TestContextRecognition extends AbstractNodeMain {
 	
 	@Override
 	public void onStart(final ConnectedNode connectedNode) {
-		cn = connectedNode;
+		cn = connectedNode;		
+		String domainFile = null;
+		ParameterTree params = cn.getParameterTree();
+		try { domainFile = params.getString("/lucia/domain"); }
+		catch(ParameterNotFoundException e) {
+			System.out.println("Please specify a domain file.");
+			System.exit(0);
+		}
+
 		SimplePlanner planner = new SimplePlanner((long)(cn.getCurrentTime().toSeconds()*1000),(long)(cn.getCurrentTime().toSeconds()*1000)+(long)1000000,0);
 		//MetaCSPLogging.setLevel(planner.getClass(), Level.FINE);
 		
 		//Planning
-		ProactivePlanningDomain.parseDomain(planner, "domains/testProactivePlanningLucia.ddl", ProactivePlanningDomain.class);
+		ProactivePlanningDomain.parseDomain(planner, domainFile, ProactivePlanningDomain.class);
 		ConstraintNetworkAnimator animator = new ConstraintNetworkAnimator(planner, 1000);
 				
 		//Sensing
