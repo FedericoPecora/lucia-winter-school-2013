@@ -4,7 +4,7 @@ import org.metacsp.multi.symbols.SymbolicVariable;
 import org.metacsp.multi.symbols.SymbolicVariableConstraintSolver;
 import org.metacsp.multi.symbols.SymbolicValueConstraint.Type;
 
-public class TestingMetaCSP {
+public class HelloWorld {
 
 	public static void main(String[] args) {
 		
