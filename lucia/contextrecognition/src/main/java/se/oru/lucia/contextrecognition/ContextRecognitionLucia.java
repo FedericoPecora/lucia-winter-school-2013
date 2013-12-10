@@ -1,5 +1,6 @@
 package se.oru.lucia.contextrecognition;
 
+import java.io.File;
 import java.util.Vector;
 import java.util.logging.Level;
 
@@ -25,7 +26,7 @@ import org.ros.node.parameter.ParameterTree;
 import org.ros.node.topic.Publisher;
 import org.ros.node.topic.Subscriber;
 
-public class TestContextRecognitionNoLaunch extends AbstractNodeMain {
+public class ContextRecognitionLucia extends AbstractNodeMain {
 
 	private ConnectedNode cn;
 	private String prefix = "/contextrecognition";
@@ -37,8 +38,8 @@ public class TestContextRecognitionNoLaunch extends AbstractNodeMain {
 	
 	@Override
 	public void onStart(final ConnectedNode connectedNode) {
-		cn = connectedNode;		
-		String domainFile = "domains/testProactivePlanningLucia.ddl";
+		cn = connectedNode;	
+		String domainFile = System.getProperty("user.home") + File.separator + ".ros" + File.separator + "domains" + File.separator + "currentContextInferenceDomain.ddl";
 
 		SimplePlanner planner = new SimplePlanner((long)(cn.getCurrentTime().toSeconds()*1000),(long)(cn.getCurrentTime().toSeconds()*1000)+(long)1000000,0);
 		//MetaCSPLogging.setLevel(planner.getClass(), Level.FINE);

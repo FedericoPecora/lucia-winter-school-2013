@@ -29,15 +29,6 @@
 (ContextVariable Human)
 (ContextVariable Alarm)
 
-# WORKS
-#(SimpleOperator
-# (Head Human::Cooking())
-# (RequiredState inkitchen Location::Kitchen())
-# (RequiredState fridgeopen Fridge::Open())
-# (Constraint Starts(Head,inkitchen))
-# (Constraint Contains(Head,fridgeopen))
-#)
-
 (SimpleOperator
  (Head Human::Cooking())
  (RequiredState inkitchen Location::Kitchen())
